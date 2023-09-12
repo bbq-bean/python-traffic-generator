@@ -1,16 +1,16 @@
 import os
 import requests
 import random
-import threading
+from multiprocessing import Process
 
 
 def start_workers():
-    workers = os.environ.get('thread_count', 10)
     # 1 - only send GET
     # 2 - only POST, will post a random work from preset lis
     http_method = os.environ.get('method', 1)
-    target_url = os.environ.get('target_url', "127.0.0.1")  # url or IP
-
+    target_url = os.environ.get('target_url', "http://google.com")  # url or IP
+    for _ in range(os.cpu_count()):
+        Process(target=hit_url, args=(http_method,target_url,)).start()
 
 
 def hit_url(http_method, target_url):
@@ -23,15 +23,10 @@ def hit_url(http_method, target_url):
             r = requests.get(target_url)
             print(r.status_code)
         else:
-            animal = random.randrange(21)
+            animal = random.randrange(20)
             r = requests.post(target_url, json={post_list[animal]: 1})
             print(r.status_code)
 
 
 if __name__ == '__main__':
     start_workers()
-    print("hi")
-
-
-
-
