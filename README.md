@@ -4,11 +4,11 @@ code to spam a target url with GET or POST methods, and track the targets HTTP r
 
 configurable with these environment variables and their defaults:
 
-'AWS_REGION', "us-east-2"
-'LOG_GROUP', "stress-tester"
-'LOG_STREAM', "stress-tester-default"
-'METHOD', 1
-'TARGET_URL', "https://1.1.1.1"
+'AWS_REGION', "us-east-2"  
+'LOG_GROUP', "stress-tester"  
+'LOG_STREAM', "stress-tester-default"  
+'METHOD', 1  
+'TARGET_URL', "https://1.1.1.1"  
 'PROCESS_COUNT', os.cpu_count()
 
 - For METHOD, 1 will spam GET requests, while 2 will do a POST... with the json payload being a random farm animal.
