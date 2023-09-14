@@ -19,7 +19,7 @@ configurable with these environment variables and their defaults:
 
 Right now, this runs well with a 1vcpu/2gb task Fargate, with CPU close to 100% and MEM +50%. 10 tasks can be run before Cloudwatch starts to throttle the logging, which is unhandled and causes the container to crash.
 
-* Finally, in cloudwatch log insights use this query to graph the responses by the target that were not HTTP 200 OK:
+** Finally, in cloudwatch log insights use this query to graph the responses by the target that were not HTTP 200 OK:
 
-fields @timestamp, @message, @logStream, @log
+fields @timestamp, @message, @logStream, @log  
 | filter @message not like '200'
