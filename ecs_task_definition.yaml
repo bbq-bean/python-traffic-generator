@@ -1,0 +1,48 @@
+{
+    "family": "stress-tester",
+    "containerDefinitions": [
+        {
+            "name": "stress",
+            "image": "xxxxxxxxxx.dkr.ecr.us-east-2.amazonaws.com/stress-tester:latest",
+            "cpu": 0,
+            "portMappings": [],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "PROCESS_COUNT",
+                    "value": "100"
+                },
+                {
+                    "name": "TARGET_URL",
+                    "value": "http://internal-xxxxxxxxxx.us-east-2.elb.amazonaws.com"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/stress-tester",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            }
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::xxxxxxxxxx:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::xxxxxxxxxx:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}

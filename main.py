@@ -12,8 +12,9 @@ def start_workers():
     # 1 - only send GET
     # 2 - only POST, will post a random work from preset lis
     http_method = os.environ.get('METHOD', 1)
-    target_url = os.environ.get('TARGET_URL', "https://1.1.1.1")  # url or IP
-    for _ in range(os.cpu_count()):
+    target_url = os.environ.get('TARGET_URL', "https://1.1.1.1")
+    # number of processes to spawn. Default is host CPU count
+    for _ in range(int(os.environ.get('PROCESS_COUNT', os.cpu_count()))):
         Process(target=hit_url, args=(http_method, target_url,)).start()
 
 
@@ -72,3 +73,4 @@ if __name__ == '__main__':
         pass
 
     start_workers()
+
